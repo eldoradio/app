@@ -1,4 +1,21 @@
 {
+  "name": "eldoradio",
+  "version": "0.0.1",
+  "description": "Listen to your favourite radio stations.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eldoradio/app"
+  },
+  "author": "Eldoradio.fm",
+  "license": "Apache-2.0.0",
+  "keywords": [
+    "ecosystem:phonegap",
+    "ecosystem:cordova"
+  ],
+  "homepage": "https://eldoradio.fm"
+}
+/*
+{
   "name": "phonegap-template-hello-world",
   "version": "4.0.2",
   "description": "> A Hello World template built with PhoneGap",
@@ -19,3 +36,4 @@
   },
   "homepage": "https://github.com/phonegap/phonegap-app-hello-world"
 }
+*/

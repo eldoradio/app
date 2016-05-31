@@ -1,49 +1,54 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
+    container: '#app',
+    sockets: 5,
+    api: 'https://socket1.eldoradio.fm/json',
+    storage: function (action, data) {
+        var session = window.sessionStorage;
+        if (action == 'get') {
+            return session.getItem(data);
+        } else if (action == 'set') {
+            var key = Object.keys(data);
+            return session.setItem(key, data[key]);
+        }
     },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+    initialize: function () {
+        document.addEventListener('deviceready', app.DeviceReady, false);
     },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+    DeviceReady: function () {
+        if (app.storage('get','stations')) {
+            app.OutputPage('home');
+        } else {
+            $.getJSON(app.api).done(function(data) {
+                if (data) {
+                    app.storage('set', {'stations':JSON.stringify(data)});
+                    app.OutputPage('home');
+                } else {
+                    app.ReloadPage();
+                }
+            })
+        }
     },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+    CompileHtml: function (element,data) {
+        var html = Handlebars.compile($(element).html());
+        return html( data !== undefined ? $.parseJSON(data) : null );
+    },
+    OutputPage: function (page) {
+        var html = '';
+        if (page == 'home') {
+            html += app.CompileHtml('#'+page);
+            html += app.CompileHtml('#stations', app.storage('get','stations'));
+        } else if (page == 'contacts') {
+            html += app.CompileHtml('#'+page);
+        };
+        $(app.container).html(html);
+        setTimeout(function () {
+            navigator.splashscreen.hide();
+        }, 1000);
+    },
+    ReloadPage: function () {
+        setTimeout(function () {
+             window.location.reload();
+        }, 30000);
     }
 };
+app.initialize();
