@@ -21,6 +21,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
                             "count": 1
                         },
@@ -39,10 +43,6 @@
                         {
                             "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
-                            "count": 1
                         }
                     ]
                 }
@@ -50,14 +50,6 @@
             "AndroidManifest.xml": {
                 "parents": {
                     "/*": [
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
-                        },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
                             "count": 1
@@ -68,6 +60,14 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
                     ]
@@ -88,6 +88,9 @@
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "fm.eldoradio"
         },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "fm.eldoradio"
+        },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "fm.eldoradio"
         },
@@ -104,9 +107,6 @@
             "PACKAGE_NAME": "fm.eldoradio"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-media": {
             "PACKAGE_NAME": "fm.eldoradio"
         }
     },
@@ -145,6 +145,20 @@
             "id": "cordova-plugin-globalization.globalization",
             "clobbers": [
                 "navigator.globalization"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-media/www/MediaError.js",
+            "id": "cordova-plugin-media.MediaError",
+            "clobbers": [
+                "window.MediaError"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-media/www/Media.js",
+            "id": "cordova-plugin-media.Media",
+            "clobbers": [
+                "window.Media"
             ]
         },
         {
@@ -326,20 +340,6 @@
                 "cordova"
             ],
             "runs": true
-        },
-        {
-            "file": "plugins/cordova-plugin-media/www/MediaError.js",
-            "id": "cordova-plugin-media.MediaError",
-            "clobbers": [
-                "window.MediaError"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-media/www/Media.js",
-            "id": "cordova-plugin-media.Media",
-            "clobbers": [
-                "window.Media"
-            ]
         }
     ],
     "plugin_metadata": {
@@ -347,12 +347,12 @@
         "cordova-plugin-console": "1.0.3",
         "cordova-plugin-dialogs": "1.2.1",
         "cordova-plugin-globalization": "1.0.3",
+        "cordova-plugin-media": "2.3.0",
         "cordova-plugin-network-information": "1.2.1",
         "cordova-plugin-splashscreen": "3.2.2",
         "cordova-plugin-statusbar": "2.1.3",
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-compat": "1.0.0",
-        "cordova-plugin-file": "4.2.0",
-        "cordova-plugin-media": "2.3.0"
+        "cordova-plugin-file": "4.2.0"
     }
 }
