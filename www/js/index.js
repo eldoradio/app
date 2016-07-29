@@ -289,9 +289,9 @@ var app = {
             ini.station.hammer['i_'+n].on('panleft panright', function(event) {
                 if (event.pointerType == 'touch' && event.eventType == 4) {
                     if (event.type == 'panleft') {
-
+                        console.log(event);
                     } else if (event.type == 'panright') {
-                        
+                        console.log(event);
                     };
                 };
             });

@@ -897,7 +897,8 @@
     }
 
     html.popup .copyright,
-    html.android.application .copyright {
+    html.android.application .copyright,
+    html.ios.application .copyright {
       visibility: hidden;
       visibility: hidden;
       padding-top: 0;
@@ -907,7 +908,8 @@
     }
 
     html.popup.on-air .copyright,
-    html.android.application.on-air .copyright {
+    html.android.application.on-air .copyright,
+    html.ios.application.on-air .copyright {
       padding-bottom: 70px;
     }
 
