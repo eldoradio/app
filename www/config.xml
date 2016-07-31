@@ -7,7 +7,6 @@
     <content src="index.html" />
     <engine name="browser" spec="~4.1.0" />
     <engine name="android" spec="~5.1.1" />
-    <preference name="fullscreen" value="true" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="phonegap-version" value="cli-6.3.0" />
@@ -26,18 +25,18 @@
         <icon density="xhdpi" src="res/icon/android/drawable-xhdpi-icon.png" />
         <icon density="xxhdpi" src="res/icon/android/drawable-xxhdpi-icon.png" />
         <icon density="xxxhdpi" src="res/icon/android/drawable-xxxhdpi-icon.png" />
-        <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi-screen.png" />
-        <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi-screen.png" />
-        <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi-screen.png" />
-        <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi-screen.png" />
-        <splash density="land-xxhdpi" src="res/screen/android/drawable-land-xxhdpi-screen.png" />
-        <splash density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi-screen.png" />
-        <splash density="port-ldpi" src="res/screen/android/drawable-port-ldpi-screen.png" />
-        <splash density="port-mdpi" src="res/screen/android/drawable-port-mdpi-screen.png" />
-        <splash density="port-hdpi" src="res/screen/android/drawable-port-hdpi-screen.png" />
-        <splash density="port-xhdpi" src="res/screen/android/drawable-port-xhdpi-screen.png" />
-        <splash density="port-xxhdpi" src="res/screen/android/drawable-port-xxhdpi-screen.png" />
-        <splash density="port-xxxhdpi" src="res/screen/android/drawable-port-xxxhdpi-screen.png" />
+        <splash orientation="landscape" density="land-ldpi" src="res/screen/android/drawable-land-ldpi-screen.png" />
+        <splash orientation="landscape" density="land-mdpi" src="res/screen/android/drawable-land-mdpi-screen.png" />
+        <splash orientation="landscape" density="land-hdpi" src="res/screen/android/drawable-land-hdpi-screen.png" />
+        <splash orientation="landscape" density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi-screen.png" />
+        <splash orientation="landscape" density="land-xxhdpi" src="res/screen/android/drawable-land-xxhdpi-screen.png" />
+        <splash orientation="landscape" density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi-screen.png" />
+        <splash orientation="portrait" density="port-ldpi" src="res/screen/android/drawable-port-ldpi-screen.png" />
+        <splash orientation="portrait" density="port-mdpi" src="res/screen/android/drawable-port-mdpi-screen.png" />
+        <splash orientation="portrait" density="port-hdpi" src="res/screen/android/drawable-port-hdpi-screen.png" />
+        <splash orientation="portrait" density="port-xhdpi" src="res/screen/android/drawable-port-xhdpi-screen.png" />
+        <splash orientation="portrait" density="port-xxhdpi" src="res/screen/android/drawable-port-xxhdpi-screen.png" />
+        <splash orientation="portrait" density="port-xxxhdpi" src="res/screen/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="windows">
         <icon height="150" platform="windows" src="res/icon/windows/Square150x150Logo.scale-100.png" width="150" />
