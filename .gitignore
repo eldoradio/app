@@ -1,3 +1,4 @@
 /platforms/
+/plugins/
 /hooks/
 sftp-config.json
