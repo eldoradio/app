@@ -231,7 +231,7 @@ var app = {
         $(document).on('click', '.link.popup', function(event) {
             event.preventDefault();
             $('header, main, footer, #templates').remove();
-            navigator.splashscreen.show();
+            navigator.splashscreen ? navigator.splashscreen.show() : null;
             $('body').append('<div style="cursor:default;position:absolute;left:0;right:0;bottom:10px;margin:auto;width:180px;background:#FFF;color:#AA0000;height:22px;border-radius:11px;text-align:center;font-size:13px;">это&nbsp;окно&nbsp;можно&nbsp;закрыть</div>');
             window.open(window.location.origin, '_blank', ini.popup.settings);
         });
