@@ -7,39 +7,12 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-globalization": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-media": {
             "PACKAGE_NAME": "fm.eldoradio"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-file": {
             "PACKAGE_NAME": "fm.eldoradio"
         }
     }

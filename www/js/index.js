@@ -163,7 +163,7 @@ var app = {
 
         setTimeout(function () {
             $('meta[name="theme-color"]').attr('content', '#FFFFFF');
-            navigator.splashscreen.hide();
+            navigator.splashscreen ? navigator.splashscreen.hide() : null;
             $('html').addClass(cordova.platformId);
             $('html').addClass(cordova.platformId == 'browser' ? ini.os.toLowerCase() : 'application');
             $('body').addClass('ready scroll');

@@ -526,18 +526,19 @@
 
     .banner {
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       padding: 30px 0;
       }
 
       .mobile-apps {
         position: absolute;
-        top: 50px;
+        top: 52px;
         right: 40px;
         width: 360px;
         height: 60px;
         background: #000000;
       }
+      /*
       .mobile-apps::before {
         content: 'Наше приложение (скоро)';
         position: absolute;
@@ -545,6 +546,7 @@
         left: 0;
         font-size: 85%;
         }
+        */
 
         .mobile-app {
           display: block;
@@ -860,6 +862,12 @@
         padding-top: 105px;
       }
   }
+
+    @media (max-width: 960px) {
+      .mobile-apps {
+        display: none;
+      }
+    }
 
   /* Landscape layout (with min-width) */
     @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {

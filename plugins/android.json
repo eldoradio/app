@@ -19,9 +19,6 @@
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "fm.eldoradio"
         },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "fm.eldoradio"
         },
@@ -37,9 +34,6 @@
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "fm.eldoradio"
-        },
-        "cordova-plugin-file": {
             "PACKAGE_NAME": "fm.eldoradio"
         }
     }
