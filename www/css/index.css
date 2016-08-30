@@ -151,8 +151,8 @@
      */
 
     h1 {
-      font-size: 2em;
-      margin: 0.67em 0;
+      font-size: 25px;
+      margin: 0 0 25px;
     }
 
     /**
@@ -484,6 +484,11 @@
       clear: both;
       }
 
+      p {
+        max-width: 800px;
+        line-height: 1.8;
+      }
+
       input {
         outline: 0;
       }
@@ -520,6 +525,10 @@
 
       .color-red {
         color: #DD0000;
+      }
+
+      .bold {
+        font-weight: bold;
       }
 
   /* banner */
@@ -587,7 +596,7 @@
       }
       .stations-search,
       .station::after {
-        background-image: url('../img/sprites.svg?v=20160623');
+        background-image: url('../img/sprites.svg?v=20160830');
         background-repeat: no-repeat;
       }
       .stations-search {
@@ -661,14 +670,14 @@
         .station.playing::after {
           background-position: 0 -60px;
         }
+        .station.paused::after {
+          background-position: 0 -30px;
+        }
         .station.loading .name {
           color: #DD0000;
         }
         .station.playing .name {
           color: #DD0000;
-        }
-        .station.pause {
-
         }
 
           .station .meta {

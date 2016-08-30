@@ -22,7 +22,10 @@ var ini = {
     },
     socket: 1,
     message: {
-        playing: '<br>Сейчас&nbsp;играет. Всего&nbsp;слушателей:&nbsp;'
+        playing: '<br>Сейчас&nbsp;играет. Всего&nbsp;слушателей:&nbsp;',
+        player_link: ' <a class="link popup">Открыть&nbsp;плеер.</a>',
+        share_link: ' <a class="link fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Feldoradio.fm%2F&amp;src=sdkpreparse">Поделиться.</a>',
+        legal_link: ' <a class="link view" data-url="/legal">Правовая&nbsp;информация.</a>'
     },
     popup: {
         settings: 'top=10,left=10,width=360,height=300,location=0,menubar=0,status=0,titlebar=0,toolbar=0'
@@ -66,6 +69,36 @@ var app = {
     initialize: function () {
         document.addEventListener('deviceready', app.DeviceReady, false);
     },
+    GetStations: function (callback) {
+        if (window.XDomainRequest) {
+            var xdr = new XDomainRequest();
+            xdr.open("get", app.api('/json'));
+            xdr.onload = function () {
+                var data = $.parseJSON(xdr.responseText);
+                if (data == null || typeof (data) == 'undefined') {
+                    app.ReloadPage();
+                } else {
+                    app.StoreStations(JSON.stringify(data));
+                    callback(true);
+                };
+            };
+            xdr.send();
+        } else {
+           $.ajax(app.api('/json'))
+            .fail(function (data) {
+                console.log('AJAX: fail - ' + JSON.stringify(data));
+            })
+            .done(function (data) {
+                console.log('AJAX: done');
+                if (data) {
+                    app.StoreStations(JSON.stringify(data));
+                    callback(true);
+                } else {
+                    callback(false);
+                };
+            });
+        };
+    },
     GetStationsBy: function (parameter, unique) {
         if (parameter === undefined || unique === undefined) {
             console.warn('Provide sorting paremeter and unique selector (true or false).');
@@ -89,11 +122,11 @@ var app = {
         data = $.parseJSON(data);
         data.sort(function (a,b) { return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0) });
         $.each(data, function (i,value) {
-            /*
-            var bitrate_limit = 32;
-            if (value.bitrate < bitrate_limit) {
-                console.log('Bitrate under ' + bitrate_limit + ': ' + value.name);
-            };
+            /* important! use to restrict stations by bitrate or other param
+                var bitrate_limit = 32;
+                if (value.bitrate < bitrate_limit) {
+                    console.log('Bitrate under ' + bitrate_limit + ': ' + value.name);
+                };
             */
             var id = value.url.split('/')[1];
             if (typeof(ini.station.list[id]) == 'undefined') {
@@ -107,83 +140,63 @@ var app = {
         if (app.storage('get','stations')) {
             app.OutputPage();
         } else {
-            if (window.XDomainRequest) {
-                var xdr = new XDomainRequest();
-                xdr.open("get", app.api('/json'));
-                xdr.onload = function () {
-                    var data = $.parseJSON(xdr.responseText);
-                    if (data == null || typeof (data) == 'undefined')
-                    {
-                        app.ReloadPage();
-                    }
-                    else
-                    {
-                        app.StoreStations(JSON.stringify(data));
-                        app.OutputPage();
-                    };
+            app.GetStations(function(done){
+                if (done) {
+                    app.OutputPage();
+                } else {
+                    app.ReloadPage();
                 };
-                xdr.send();
-            } else {
-               $.ajax(app.api('/json'))
-                .fail(function (data) {
-                    console.log('AJAX: fail - ' + JSON.stringify(data));
-                })
-                .done(function (data) {
-                    console.log('AJAX: done');
-                    if (data) {
-                        app.StoreStations(JSON.stringify(data));
-                        app.OutputPage();
-                    } else {
-                        app.ReloadPage();
-                    }
-                });
-            };
+            });
         };
     },
-    CompileHtml: function (element,data) {
+    CompileHtml: function (element, data) {
         var html = Handlebars.compile($(element).html());
         return html( data !== undefined ? $.parseJSON(data) : null );
     },
-    OutputPage: function (page) {
-        var html = ''; page = page || 'home';
+    OutputPage: function (page, view) {
 
         /* router */
-        if (page == 'home') {
-            html += app.CompileHtml('#'+page);
-            ini.station.list = $.parseJSON(app.storage('get','stations'));
-            $.each(ini.countries, function (i,value) {
-                html += app.CompileHtml('#stations', JSON.stringify({country: value, data: ini.station.list[i] }));
-            });
-        } else if (page == 'contacts') {
-            html += app.CompileHtml('#'+page);
-        };
 
-        $(ini.container).html(html);
-        app.SetEventListeners();
+            var html = '';
+                page = page || window.location.pathname;
+                page = page.replace(/^\//, '');
+                page == '' ? page = 'home' : null;
 
-        setTimeout(function () {
-            $('meta[name="theme-color"]').attr('content', '#FFFFFF');
-            navigator.splashscreen ? navigator.splashscreen.hide() : null;
-            $('html').addClass(cordova.platformId);
-            $('html').addClass(cordova.platformId == 'browser' ? ini.os.toLowerCase() : 'application');
-            $('body').addClass('ready scroll');
-            app.AttachScrollbar('body');
-            if (window.opener && window.opener !== window) {
-                $('html').addClass('popup');
+            if (page == 'home') {
+                html += app.CompileHtml('#'+page);
+                ini.station.list = $.parseJSON(app.storage('get','stations'));
+                $.each(ini.countries, function (i,value) {
+                    html += app.CompileHtml('#stations', JSON.stringify({country: value, data: ini.station.list[i] }));
+                });
+            } else if (page == 'legal') {
+                html += app.CompileHtml('#'+page);
+            } else {
+                html += app.CompileHtml('#notfound');
             };
-            if ($('html').hasClass('browser windows')) {
-                $('.copyright').append(' <a class="link popup">Открыть&nbsp;плеер&nbsp;в&nbsp;новом&nbsp;окне.</a>');
-                $('.copyright').append(' <a class="link fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Feldoradio.fm%2F&amp;src=sdkpreparse">Поделиться.</a>');
-            };
-            $('.stations-title').eq(0).addClass('active');
-        }, 1000);
+
+            $(ini.container).html(html);
+
+        /* !pushstate */
+
+            if (!view) {
+
+                /* elements' event listeners */
+                    app.SetEventListeners();
+
+                /* splash screen */
+                    navigator.splashscreen ? navigator.splashscreen.hide() : null;
+
+                app.PreparePage();
+                app.AttachScrollbar('body');
+
+            }
 
     },
     AttachScrollbar: function (element) {
         if (typeof $.fn.scroll == 'function'  && ini.os == 'Windows') {
             $(element).scrollbar({
                 horizrailenabled: false,
-                autohidemode: true,
+                autohidemode: false,
                 cursorcolor: '#DD0000',
                 background: 'transparent',
                 cursorwidth: '5px',
@@ -192,16 +205,25 @@ var app = {
             });
         };
     },
+    PreparePage: function () {
+        $('meta[name="theme-color"]').attr('content', '#FFFFFF');
+        $('html').addClass(cordova.platformId);
+        $('html').addClass(cordova.platformId == 'browser' ? ini.os.toLowerCase() : 'application');
+        $('body').addClass('ready scroll');
+        if (window.opener && window.opener !== window) {
+            $('html').addClass('popup');
+        };
+        if ($('html').hasClass('browser windows')) {
+            $('.copyright').append(ini.message.player_link, ini.message.share_link, ini.message.legal_link);
+        };
+        if ($('.stations-title').length > 0) {
+            $('.stations-title').eq(0).addClass('active');
+        };
+    },
     ReloadPage: function () {
         setTimeout(function () {
              window.location.reload();
         }, 30000);
-    },
-    SetStationsHeight: function (e) {
-        $(e).each(function () {
-            var e = $(this);
-            e.css({'overflow': 'hidden','height': $(window).height() - ( $('#header').outerHeight() + $('#footer').outerHeight() ) - ( e.outerHeight() - e.height() ) }); 
-        });
     },
     AudioEventListener: function (e) {
         $(ini.audio.id).get(0).addEventListener(e, function () {
@@ -223,12 +245,19 @@ var app = {
         for (var i = 0; i < ini.audio.events.length; i++) {
             app.AudioEventListener(ini.audio.events[i]);
         };
-        /*
-        $(ini.audio.id).get(0).addEventListener('progress', function () {
-            console.log('Audio buffered: ' + $(ini.audio.id).get(0).buffered.end(0));
-        }, true);
-        */
-        $(document).on('click', '.link.popup', function(event) {
+        $(window).on('popstate',function(event) {
+            event.preventDefault();
+            app.OutputPage(window.location.pathname, true);
+            $('html, body').animate({ scrollTop: 0 }, 100);
+        });
+        $(document).on('click', '.view', function(event) {
+            event.preventDefault();
+            var page = $(this).data('url');
+            history.pushState(null,null,page);
+            app.OutputPage(page, true);
+            $('html, body').animate({ scrollTop: 0 }, 100);
+        });
+        $(document).on('click', '.popup', function(event) {
             event.preventDefault();
             $('header, main, footer, #templates').remove();
             navigator.splashscreen ? navigator.splashscreen.show() : null;
@@ -299,4 +328,5 @@ var app = {
         });
     }
 };
+
 app.initialize();
