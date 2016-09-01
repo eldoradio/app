@@ -23,9 +23,9 @@ var ini = {
     socket: 1,
     message: {
         playing: '<br>Сейчас&nbsp;играет. Всего&nbsp;слушателей:&nbsp;',
-        player_link: ' <a class="link popup">Открыть&nbsp;плеер.</a>',
-        share_link: ' <a class="link fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Feldoradio.fm%2F&amp;src=sdkpreparse">Поделиться.</a>',
-        legal_link: ' <a class="link view" data-url="/legal">Правовая&nbsp;информация.</a>'
+        player_link: ' <a class="link popup application-hidden">Открыть&nbsp;плеер</a>',
+        share_link: ' <a class="link fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Feldoradio.fm%2F&amp;src=sdkpreparse">Поделиться</a>',
+        legal_link: ' <a class="link view" data-url="/legal">Правовая&nbsp;информация</a>'
     },
     popup: {
         settings: 'top=10,left=10,width=360,height=300,location=0,menubar=0,status=0,titlebar=0,toolbar=0'
@@ -163,18 +163,24 @@ var app = {
                 page == '' ? page = 'home' : null;
 
             if (page == 'home') {
+                $('html').removeClass('is-textual');
                 html += app.CompileHtml('#'+page);
                 ini.station.list = $.parseJSON(app.storage('get','stations'));
                 $.each(ini.countries, function (i,value) {
                     html += app.CompileHtml('#stations', JSON.stringify({country: value, data: ini.station.list[i] }));
                 });
             } else if (page == 'legal') {
+                $('html').addClass('is-textual');
                 html += app.CompileHtml('#'+page);
             } else {
                 html += app.CompileHtml('#notfound');
             };
 
             $(ini.container).html(html);
+
+            if ($('.stations-title').length > 0) {
+                $('.stations-title').eq(0).addClass('active');
+            };
 
         /* !pushstate */
 
@@ -206,18 +212,14 @@ var app = {
         };
     },
     PreparePage: function () {
-        $('meta[name="theme-color"]').attr('content', '#FFFFFF');
         $('html').addClass(cordova.platformId);
         $('html').addClass(cordova.platformId == 'browser' ? ini.os.toLowerCase() : 'application');
         $('body').addClass('ready scroll');
         if (window.opener && window.opener !== window) {
             $('html').addClass('popup');
         };
-        if ($('html').hasClass('browser windows')) {
+        if ($('html').hasClass('browser')) {
             $('.copyright').append(ini.message.player_link, ini.message.share_link, ini.message.legal_link);
-        };
-        if ($('.stations-title').length > 0) {
-            $('.stations-title').eq(0).addClass('active');
         };
     },
     ReloadPage: function () {
@@ -250,6 +252,10 @@ var app = {
             app.OutputPage(window.location.pathname, true);
             $('html, body').animate({ scrollTop: 0 }, 100);
         });
+        $(document).on('click', '.copyright-toggle, .copyright.active .link:not([target="_blank"])', function(event) {
+            event.preventDefault();
+            $('.copyright').toggleClass('active');
+        });
         $(document).on('click', '.view', function(event) {
             event.preventDefault();
             var page = $(this).data('url');
@@ -257,7 +263,7 @@ var app = {
             app.OutputPage(page, true);
             $('html, body').animate({ scrollTop: 0 }, 100);
         });
-        $(document).on('click', '.popup', function(event) {
+        $(document).on('click', '.link.popup', function(event) {
             event.preventDefault();
             $('header, main, footer, #templates').remove();
             navigator.splashscreen ? navigator.splashscreen.show() : null;

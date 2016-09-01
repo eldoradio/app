@@ -504,6 +504,9 @@
       a:active {
         color: #AA0000;
       }
+      a:focus {
+        outline: none;
+      }
       a.link {
         text-shadow: 2px 0 #fff,
                      2px 0 #fff,
@@ -529,6 +532,10 @@
 
       .bold {
         font-weight: bold;
+      }
+
+      html.application .application-hidden {
+        display: none !important;
       }
 
   /* banner */
@@ -717,6 +724,10 @@
     padding: 30px 0 15px;
   }
 
+  .copyright-toggle {
+    display: none;
+  }
+
   @media (max-width:800px) {
     body {
       font-size: 13px;
@@ -746,10 +757,22 @@
       background-size: 228px;
       box-shadow: 0 0 10px rgba(0,0,0,.1);
       z-index: 2;
+      transition: height .1s ease;
+    }
+    html.is-textual header {
+      height: 60px !important;
+    }
+    .textual {
+      margin: 75px 5% 0;
     }
     .banner,
     .mobile-apps {
       display: none;
+    }
+    .banner-link {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
     .stations {
       float: none;
@@ -806,9 +829,51 @@
       display: inline-block;
     }
     .copyright {
-      padding: 30px 15px 15px;
-      text-align: center;
+      display: none;
+      position: fixed;
+      top: 50px;
+      right: 3.5%;
+      padding: 0;
+      background: #FFFFFF;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 5px rgba(0,0,0,.1);
+      z-index: 5;
+      }
+    .copyright.active {
+      display: block;
     }
+      .copyright-toggle {
+        display: block;
+        position: fixed;
+        top: 30px;
+        right: 2.5%;
+        z-index: 4;
+        border: 0;
+        background: #fff;
+        padding: 0;
+        height: 0;
+        font-size: 35px;
+        line-height: 0;
+        cursor: pointer;
+        transform: rotate(90deg);
+        outline: none;
+      }
+      .copyright-notice {
+        display: none;
+      }
+      .copyright .link {
+        display: block;
+        background-image: none;
+        padding: 10px 15px 12px;
+        color: #000;
+        border-bottom: 1px solid #f3f3f3;
+      }
+      .copyright .link:hover {
+        background: #fafafa;
+      }
+      .copyright :last-child  {
+        border-bottom: 0;
+      }
     /* android */
       html.android.application header,
       html.browser header {
@@ -887,46 +952,35 @@
 
   /* Other States */
 
-    html.on-air .copyright {
-      padding-bottom: 90px;
-    }
-
-    html.popup header,
-    html.android.application header {
-        height: 53px;
+    html.popup header {
+        height: 50px;
         background: #FFFFFF;
     }
 
-    html.popup .stations-title,
-    html.android.application .stations-title {
-      top: 10px;
-      padding-bottom: 15px;
+    html.popup .stations-title {
+      top: 8px;
+      padding-bottom: 14px;
     }
 
-    html.popup .stations-list,
-    html.android.application .stations-list {
-        padding-top: 53px;
+    html.popup .stations-list {
+        padding-top: 50px;
     }
 
-    html.popup .stations-search,
-    html.android.application .stations-search {
-        padding-bottom: 5px;
+    html.popup .stations-search {
+        top: 13px;
     }
 
-    html.popup .copyright,
-    html.android.application .copyright,
-    html.ios.application .copyright {
-      visibility: hidden;
-      visibility: hidden;
-      padding-top: 0;
-      padding-bottom: 0;
-      height: 0;
-      font-size: 0;
+    html.popup .stations-search:focus {
+      padding-bottom: 5px;
     }
 
-    html.popup.on-air .copyright,
-    html.android.application.on-air .copyright,
-    html.ios.application.on-air .copyright {
+    html.popup .copyright .link,
+    html.popup .copyright-toggle,
+    html.popup .banner-link {
+      display: none;
+    }
+
+    html.on-air footer {
       padding-bottom: 70px;
     }
 
