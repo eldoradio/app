@@ -41,11 +41,12 @@ var ini = {
     // "UNIX"       for all other UNIX flavors 
     // "Unknown" indicates failure to detect the OS
 
-    if (navigator.appVersion.indexOf("Win")!=-1) ini.os = "Windows";
-    if (navigator.appVersion.indexOf("Mac")!=-1) ini.os = "MacOS";
-    if (navigator.appVersion.indexOf("Linux")!=-1) ini.os = "Linux";
-    if (navigator.appVersion.indexOf("Android")!=-1) ini.os = "Android";
-    if (navigator.appVersion.indexOf("X11")!=-1) ini.os = "UNIX";
+    if (navigator.appVersion.indexOf('Win')!=-1) ini.os = 'Windows';
+    if (navigator.appVersion.indexOf('Mac')!=-1) ini.os = 'MacOS';
+    if (navigator.appVersion.indexOf('Linux')!=-1) ini.os = 'Linux';
+    if (navigator.appVersion.indexOf('Android')!=-1) ini.os = 'Android';
+    if (navigator.appVersion.indexOf('X11')!=-1) ini.os = 'UNIX';
+    if (cordova.platformId!='browser') history.replaceState(null,null,'/');
 
 var app = {
     socket: function () {
@@ -158,7 +159,7 @@ var app = {
         /* router */
 
             var html = '';
-                page = page || window.location.pathname;
+                page = page || location.pathname;
                 page = page.replace(/^\//, '');
                 page == '' ? page = 'home' : null;
 
@@ -182,15 +183,15 @@ var app = {
                 $('.stations-title').eq(0).addClass('active');
             };
 
+        /* splash screen */
+            navigator.splashscreen ? navigator.splashscreen.hide() : null;
+
         /* !pushstate */
 
             if (!view) {
 
                 /* elements' event listeners */
                     app.SetEventListeners();
-
-                /* splash screen */
-                    navigator.splashscreen ? navigator.splashscreen.hide() : null;
 
                 app.PreparePage();
                 app.AttachScrollbar('body');
@@ -214,17 +215,15 @@ var app = {
     PreparePage: function () {
         $('html').addClass(cordova.platformId);
         $('html').addClass(cordova.platformId == 'browser' ? ini.os.toLowerCase() : 'application');
-        $('body').addClass('ready scroll');
+        $('.copyright').append(ini.message.player_link, ini.message.share_link, ini.message.legal_link);
         if (window.opener && window.opener !== window) {
             $('html').addClass('popup');
         };
-        if ($('html').hasClass('browser')) {
-            $('.copyright').append(ini.message.player_link, ini.message.share_link, ini.message.legal_link);
-        };
+        $('body').addClass('ready scroll');
     },
     ReloadPage: function () {
         setTimeout(function () {
-             window.location.reload();
+             location.reload();
         }, 30000);
     },
     AudioEventListener: function (e) {
@@ -249,7 +248,7 @@ var app = {
         };
         $(window).on('popstate',function(event) {
             event.preventDefault();
-            app.OutputPage(window.location.pathname, true);
+            app.OutputPage(location.pathname, true);
             $('html, body').animate({ scrollTop: 0 }, 100);
         });
         $(document).on('click', '.copyright-toggle, .copyright.active .link:not([target="_blank"])', function(event) {
@@ -269,7 +268,7 @@ var app = {
             navigator.splashscreen ? navigator.splashscreen.show() : null;
             $('body').css('background','#DD0000');
             $('body').append('<div style="cursor:default;position:absolute;left:0;right:0;bottom:10px;margin:auto;width:180px;background:#FFF;color:#AA0000;height:22px;border-radius:11px;text-align:center;font-size:13px;">это&nbsp;окно&nbsp;можно&nbsp;закрыть</div>');
-            window.open(window.location.origin, '_blank', ini.popup.settings);
+            window.open(location.origin, '_blank', ini.popup.settings);
         });
         $(document).on('click', ini.station.title, function (event) {
             event.preventDefault();
