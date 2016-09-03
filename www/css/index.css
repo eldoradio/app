@@ -458,7 +458,7 @@
     margin: 0px;
     padding: 0px;
     width: 100%;
-    min-width: 280px;
+    min-width: 350px;
     overflow: hidden;
     color: #000000;
     }
@@ -508,12 +508,12 @@
         outline: none;
       }
       a.link {
-        text-shadow: 2px 0 #fff,
-                     2px 0 #fff,
-                     1px 0 #fff,
-                     -1px 0 #fff,
-                     -2px 0 #fff,
-                     -2px 0 #fff;
+        text-shadow: 2px 0 #FFFFFF,
+                     2px 0 #FFFFFF,
+                     1px 0 #FFFFFF,
+                     -1px 0 #FFFFFF,
+                     -2px 0 #FFFFFF,
+                     -2px 0 #FFFFFF;
         background-image: linear-gradient(to bottom,#AA0000 0,#AA0000 100%);
         background-position: 0 97%;
         background-repeat: repeat-x;
@@ -595,18 +595,20 @@
         padding-left: 0;
       }
 
-      .stations-title {
+      .title {
         position: relative;
         border-bottom: 1px solid #AAAAAA;
         cursor: pointer;
         padding: 15px 60px 15px 0;
       }
-      .stations-search,
+      .search,
+      .close,
+      .save,
       .station::after {
         background-image: url('../img/sprites.svg?v=20160830');
         background-repeat: no-repeat;
       }
-      .stations-search {
+      .search {
         position: absolute;
         right: 0;
         width: 30px;
@@ -615,22 +617,22 @@
         background-color: #FFFFFF;
         border: 1px solid #FFFFFF;
         color: transparent;
-        transition: all .1s ease;
         background-position: 0 -105px;
         background-size: 26px;
       }
-      .stations-search:focus {
+      .search:focus {
         background-image: none;
         width: 100%;
         color: #000000;
         }
-
+        .close {
+          display: none;
+        }
         .station {
           position: relative;
-          max-width: 600px;
           border-top: 1px solid #EEEEEE;
           cursor: pointer;
-          padding: 15px 60px 15px 0;
+          padding: 15px 80px 15px 0;
         }
         .station:first-child {
           border-top: 0;
@@ -675,7 +677,7 @@
           }
         }
         .station.playing::after {
-          background-position: 0 -60px;
+          background-position: 0 -30px;
         }
         .station.paused::after {
           background-position: 0 -30px;
@@ -686,12 +688,23 @@
         .station.playing .name {
           color: #DD0000;
         }
-
           .station .meta {
             text-overflow: ellipsis;
             white-space: nowrap;
             display: block;
             overflow: hidden;
+          }
+          .save {
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            right: 50px;
+            margin-top: -30px;
+            background-position: 0 -214px;
+          }
+          .save.active {
+            background-position:  0 -186px;
           }
 
   /* player */
@@ -706,6 +719,12 @@
         /*padding-top: 8px;
         padding-bottom: 8px;*/
         z-index: 2;
+      }
+      .player .station .save {
+        display: none;
+      }
+      .player .station.playing::after {
+        background-position: 0 -60px;
       }
       .player::after {
         content: '';
@@ -730,12 +749,6 @@
 
   @media (max-width:800px) {
     body {
-      font-size: 13px;
-    }
-  }
-
-  @media (max-width:600px) {
-    body {
       font-size: 15px;
     }
     body.ready header,
@@ -747,7 +760,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      height: 105px;
+      height: 98px;
       border-bottom: 1px solid #EEEEEE;
       background-image: url('../img/banner_mobile.svg');
       background-color: #FFFFFF;
@@ -780,47 +793,69 @@
       padding-left: 0;
     }
     .station {
-      padding: 15px 60px 15px 15px;
+      padding-left: 15px;
     }
     .station:after {
       right: 15px;
     }
-    .stations-title:not(.active) + .stations-list {
+    .title:not(.active) + .list {
       display: none;
     }
-    .stations-title {
+    .title {
       position: fixed;
       top: 60px;
       width: 27%;
       text-align: center;
       z-index: 3;
     }
-    .stations-title {
+    .title {
       position: fixed;
-      top: 60px;
-      width: 27%;
+      top: 61px;
+      width: 33.3%;
+      padding: 6px 0 10px;
       text-align: center;
+      border: 0;
+      border-bottom: 2px solid #FFFFFF;
+      color: #AA0000;
+      background: #FFFFFF;
       z-index: 3;
     }
-    .stations-title.active {
+    .title.active {
+      color: #DD0000;
+      border-bottom: 2px solid #DD0000;
       z-index: 4;
     }
-    .stations:nth-child(1) .stations-title {
-      left: 3%;
+    .stations:nth-child(1) .title {
+      left: 0;
     }
-    .stations:nth-child(2) .stations-title {
-      left: 30%;
+    .stations:nth-child(2) .title {
+      left: 33.3%;
     }
-    .stations:nth-child(3) .stations-title {
-      left: 57%;
+    .stations:nth-child(3) .title {
+      left: 66.6%;
     }
-    .stations-search {
+    .list {
+      padding-top: 98px;
+    }
+    .search {
       position: fixed;
-      right: 3.5%;
+      top: 18px;
+      left: 10px;
     }
-    .stations-search:focus {
-      width: 93%;
+    .search:focus {
+      top: 0;
+      left: 0;
+      padding: 60px 0 7px 10px;
       border-bottom: 1px solid #DD0000;
+    }
+    .search:focus + .close {
+      display: block;
+      position: fixed;
+      background-position: 0 -155px;
+      width: 30px;
+      height: 20px;
+      top: 20px;
+      left: 10px;
     }
     .player {
       width: 100%;
@@ -842,111 +877,104 @@
     .copyright.active {
       display: block;
     }
-      .copyright-toggle {
-        display: block;
-        position: fixed;
-        top: 30px;
-        right: 2.5%;
-        z-index: 4;
-        border: 0;
-        background: #fff;
-        padding: 0;
-        height: 0;
-        font-size: 35px;
-        line-height: 0;
-        cursor: pointer;
-        transform: rotate(90deg);
-        outline: none;
-      }
-      .copyright-notice {
-        display: none;
-      }
-      .copyright .link {
-        display: block;
-        background-image: none;
-        padding: 10px 15px 12px;
-        color: #000;
-        border-bottom: 1px solid #f3f3f3;
-      }
-      .copyright .link:hover {
-        background: #fafafa;
-      }
-      .copyright :last-child  {
-        border-bottom: 0;
-      }
-    /* android */
+    .copyright-toggle {
+      display: block;
+      position: fixed;
+      top: 30px;
+      right: 0;
+      border: 0;
+      background: #FFFFFF;
+      padding: 0;
+      height: 0;
+      font-size: 24px;
+      line-height: 0;
+      cursor: pointer;
+      transform: rotate(90deg);
+      outline: none;
+      z-index: 4;
+    }
+    .copyright-notice {
+      display: none;
+    }
+    .copyright .link {
+      display: block;
+      background-image: none;
+      padding: 10px 15px 12px;
+      color: #000;
+      border-bottom: 1px solid #f3f3f3;
+    }
+    .copyright .link:hover {
+      background: #fafafa;
+    }
+    .copyright :last-child  {
+      border-bottom: 0;
+    }
+    /* android *//*
       html.android.application header,
       html.browser header {
         height: 98px;
       }
-      html.android.application .stations-title,
-      html.browser .stations-title {
+      html.android.application .title,
+      html.browser .title {
         padding: 6px 0 10px;
         border: 0;
         border-bottom: 2px solid #FFFFFF;
         color: #AA0000;
         background: #FFFFFF;
       }
-      html.android.application .stations-title.active,
-      html.browser .stations-title.active {
+      html.android.application .title.active,
+      html.browser .title.active {
         color: #DD0000;
         border-bottom: 2px solid #DD0000;
         z-index: 4;
       }
-      html.android.application .stations-list,
-      html.browser .stations-list {
+      html.android.application .list,
+      html.browser .list {
         padding-top: 98px;
       }
-      html.android.application .stations-search,
-      html.browser .stations-search {
+      html.android.application .search,
+      html.browser .search {
         margin-top: 0;
-      }
-    /* ios */
+      } */
+    /* ios *//*
       html.ios.application header,
       html.macos header {
         height: 105px;
       }
-      html.ios.application .stations-title,
-      html.macos .stations-title {
+      html.ios.application .title,
+      html.macos .title {
         padding: 3px 0;
         border: 1px solid #DD0000;
         color: #DD0000;
         background: #FFFFFF;
       }
-      html.ios.application .stations-title.active,
-      html.macos .stations-title.active {
+      html.ios.application .title.active,
+      html.macos .title.active {
         background: #DD0000;
         color: #FFFFFF;
         border: 1px solid #DD0000;
       }
-      html.ios.application .stations:nth-child(1) .stations-title,
-      html.macos .stations:nth-child(1) .stations-title {
+      html.ios.application .stations:nth-child(1) .title,
+      html.macos .stations:nth-child(1) .title {
         border-radius: 16px 0 0 16px;
       }
-      html.ios.application .stations:nth-child(3) .stations-title,
-      html.macos .stations:nth-child(3) .stations-title {
+      html.ios.application .stations:nth-child(3) .title,
+      html.macos .stations:nth-child(3) .title {
         border-radius: 0 16px 16px 0;
       }
-      html.ios.application .stations-search,
-      html.macos .stations-search {
+      html.ios.application .search,
+      html.macos .search {
         margin-top: -4px;
       }
-      html.ios.application .stations-list,
-      html.macos .stations-list {
+      html.ios.application .list,
+      html.macos .list {
         padding-top: 105px;
-      }
+      } */
   }
 
     @media (max-width: 960px) {
       .mobile-apps {
         display: none;
-      }
-    }
-
-  /* Landscape layout (with min-width) */
-    @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-      main {
-
       }
     }
 
@@ -957,23 +985,16 @@
         background: #FFFFFF;
     }
 
-    html.popup .stations-title {
+    html.popup .title {
       top: 8px;
       padding-bottom: 14px;
     }
 
-    html.popup .stations-list {
+    html.popup .list {
         padding-top: 50px;
     }
 
-    html.popup .stations-search {
-        top: 13px;
-    }
-
-    html.popup .stations-search:focus {
-      padding-bottom: 5px;
-    }
-
+    html.popup .search,
     html.popup .copyright .link,
     html.popup .copyright-toggle,
     html.popup .banner-link {

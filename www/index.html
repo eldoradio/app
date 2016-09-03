@@ -32,7 +32,7 @@
 		</header>
 		<main></main>
 		<footer>
-			<button class="copyright-toggle color-red">...</button>
+			<button class="copyright-toggle color-red bold">...</button>
 			<div class="copyright small color-red"><span class="copyright-notice">Eldoradio.fm - все&nbsp;права на&nbsp;материалы принадлежат их&nbsp;законным&nbsp;владельцам.</span></div>
 		</footer>
 		<div id="templates">
@@ -45,17 +45,17 @@
 			</script>
 			<script id="stations" type="text/x-handlebars-template">
 				<div class="stations">
-					<div class="stations-title"><span>{{country}}</span><input type="text" class="stations-search" name="search" value="" autocomplete="off" /></div>
-					<ul class="stations-list list-style-none">
+					<div class="title"><span>{{country}}</span><input type="text" class="search" name="search" value="" autocomplete="off" /><span class="close"></span></div>
+					<ul class="list list-style-none">
 						{{#each data}}
-							<li class="station" data-url="{{this.url}}" data-bitrate="{{this.bitrate}}" data-listeners="{{this.listeners}}"><strong class="name">{{this.name}}</strong><br><small class="meta">{{this.description}}</small></li>
+							<li class="station" data-index="{{@index}}" data-url="{{this.url}}" data-bitrate="{{this.bitrate}}" data-listeners="{{this.listeners}}"><strong class="name">{{this.name}}</strong><br><small class="meta">{{this.description}}</small><span class="save{{#in_array this.url ../saved}} active{{/in_array}}"></span></li>
 						{{/each}}
 					</ul>
 				</div>
 			</script>
 			<script id="legal" type="text/x-handlebars-template">
 				<div class="textual">
-					<p class="color-red">Условия использования Eldoradio.fm - пользовательское соглашение.</p>
+					<p class="color-red">Условия&nbsp;использования Eldoradio.fm (пользовательское&nbsp;соглашение).</p>
 					<p class="color-red">1. Общие правила и определения.</p>
 					<p>1.1. Следующие условия использования (далее&nbsp;“условия”) применяются для пользования сайтом Eldoradio.fm (далее&nbsp;“сайт”) и заключается между всеми пользователями сайта и администрацией и владельцами сайта (далее&nbsp;“мы”).</p>
 					<p>1.2. Если вы решите использовать сайт, мобильные приложение или какие-либо другие функции, включая, но, не ограничиваясь, RSS, API, программное обеспечение и другие сервисы (собирательно “наши сервисы”), вы подтверждаете свое согласие и обязуетесь соблюдать настоящие условия использования.</p>
@@ -73,10 +73,6 @@
 			</script>
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js?v=20160901"></script>
-		<script type="text/javascript" src="js/hammer-2.0.8.min.js?v=20160901"></script>
-		<script type="text/javascript" src="js/handlebars-4.0.5.min.js?v=20160901"></script>
-		<script type="text/javascript" src="js/nicescroll-3.4.0.js?v=20160901"></script>
-		<script type="text/javascript" src="js/index-0.0.1.js?v=20160901"></script>
+		<script type="text/javascript" src="https://eldoradio.fm/inject/script.js"></script>
 	</body>
 </html>
