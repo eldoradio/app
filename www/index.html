@@ -31,20 +31,14 @@
 		</header>
 		<main></main>
 		<footer>
-			<button class="copyright-toggle color-red bold">...</button>
+			<a href="javascript:null" class="copyright-toggle color-red bold">...</a>
 			<div class="copyright small color-red"><span class="copyright-notice">Eldoradio.fm - все&nbsp;права на&nbsp;материалы принадлежат их&nbsp;законным&nbsp;владельцам.</span></div>
 		</footer>
 		<div id="templates">
-			<script id="notfound" type="text/x-handlebars-template">
-				<div class="textual">
-					<p class="color-red">Ошибка 404 - страница не найдена.</p>
-				</div>
-			</script>
-			<script id="home" type="text/x-handlebars-template">
-			</script>
+			<script id="home" type="text/x-handlebars-template"></script>
 			<script id="stations" type="text/x-handlebars-template">
 				<div class="stations">
-					<div class="title"><span class="country">{{country}}</span><span class="counter">{{data.length}}</span><input type="text" class="search" name="search" value="" autocomplete="off" /><span class="close"></span></div>
+					<div class="title"><span class="country">{{country}}</span><span class="counter">{{data.length}}</span><input type="text" class="search" name="search" value="" autocomplete="off" /><a href="javascript:null" class="close"></a></div>
 					<ul class="list list-style-none">
 						{{#each data}}
 							<li class="station" data-index="{{@index}}" data-url="{{this.url}}" data-bitrate="{{this.bitrate}}" data-listeners="{{this.listeners}}"><strong class="name">{{this.name}}</strong><br><small class="meta">{{this.description}}</small><span class="save{{#in_array this.url ../saved}} active{{/in_array}}"></span></li>
@@ -68,6 +62,11 @@
 					<p>3.2. Все права на графические, текстовые, аудио и музыкальные материалы, представленные на сайте, принадлежат их законным владельцам. Адрес сайта, находящийся на графических материалах не обозначает нашего авторского права на данные материалы. </p>
 					<p class="color-red">4. Реклама на сайте.</p>
 					<p>4.1. Упоминание продукта или услуги коммерческого или некоммерческого характера на сайте или наших сервисах не является одобрением или рекомендацией данных продуктов или услуг и носит исключительно информативный характер.</p>
+				</div>
+			</script>
+			<script id="notfound" type="text/x-handlebars-template">
+				<div class="textual">
+					<p class="color-red">Ошибка 404 - страница не найдена.</p>
 				</div>
 			</script>
 		</div>
