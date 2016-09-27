@@ -2,12 +2,11 @@
 <html>
 	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# music: http://ogp.me/ns/music#">
 		<meta charset="utf-8" />
+		<meta name="theme-color" content="#DD0000" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 		<title>Eldoradio.fm - любымые радиостанции онлайн</title>
 		<meta name="description" content="Слушайте самые популярные радиостанции России, Украины и Казахстана на eldoradio.fm">
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="msapplication-tap-highlight" content="no" />
-		<meta name="theme-color" content="#DD0000" />
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 		<meta property="og:url" content="http://eldoradio.fm" />
 		<meta property="og:type" content="music.radio_station" />
 		<meta property="og:title" content="Eldoradio.fm - любымые радиостанции онлайн" />
@@ -17,59 +16,6 @@
 		<link rel="stylesheet" type="text/css" href="http://eldoradio.fm/inject/style.css" />
 	</head>
 	<body>
-		<script>window.fbAsyncInit = function() { FB.init({ appId : "1202365276475059", xfbml : true, version : "v2.6" }) }; (function(d, s, id){ var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return } js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/ru_RU/sdk.js"; fjs.parentNode.insertBefore(js, fjs) }(document, "script", "facebook-jssdk"));</script>
-		<header>
-			<a class="banner-link view" data-url="/">
-				<img class="banner" src="img/banner.png" alt="Eldoradio.fm">
-			</a>
-			<div class="mobile-apps">
-				<a class="mobile-app ios" href="javascript:void(0)"></a>
-				<a class="mobile-app android" href="javascript:void(0)"></a>
-			</div>
-			<audio preload="none" type="audio/mpeg" src=""></audio>
-			<ul class="player list-style-none"></ul>
-		</header>
-		<main></main>
-		<footer>
-			<a href="javascript:null" class="copyright-toggle color-red bold">...</a>
-			<div class="copyright small color-red"><span class="copyright-notice">Eldoradio.fm - все&nbsp;права на&nbsp;материалы принадлежат их&nbsp;законным&nbsp;владельцам.</span></div>
-		</footer>
-		<div id="templates">
-			<script id="home" type="text/x-handlebars-template"></script>
-			<script id="stations" type="text/x-handlebars-template">
-				<div class="stations">
-					<div class="title"><span class="country">{{country}}</span><span class="counter">{{data.length}}</span><input type="text" class="search" name="search" value="" autocomplete="off" /><a href="javascript:null" class="close"></a></div>
-					<ul class="list list-style-none">
-						{{#each data}}
-							<li class="station" data-index="{{@index}}" data-url="{{this.url}}" data-bitrate="{{this.bitrate}}" data-listeners="{{this.listeners}}"><strong class="name">{{this.name}}</strong><br><small class="meta">{{this.description}}</small><span class="save{{#in_array this.url ../saved}} active{{/in_array}}"></span></li>
-						{{/each}}
-					</ul>
-				</div>
-			</script>
-			<script id="legal" type="text/x-handlebars-template">
-				<div class="textual">
-					<p class="color-red">Условия&nbsp;использования Eldoradio.fm (пользовательское&nbsp;соглашение).</p>
-					<p class="color-red">1. Общие правила и определения.</p>
-					<p>1.1. Следующие условия использования (далее&nbsp;“условия”) применяются для пользования сайтом Eldoradio.fm (далее&nbsp;“сайт”) и заключается между всеми пользователями сайта и администрацией и владельцами сайта (далее&nbsp;“мы”).</p>
-					<p>1.2. Если вы решите использовать сайт, мобильные приложение или какие-либо другие функции, включая, но, не ограничиваясь, RSS, API, программное обеспечение и другие сервисы (собирательно “наши сервисы”), вы подтверждаете свое согласие и обязуетесь соблюдать настоящие условия использования.</p>
-					<p>1.3. Мы можем в любое время изменить, дополнить или удалить части настоящих условий использования. При этом все изменения вступают в силу сразу же после публикации. Вы можете пересматривать условия использования перед каждым взаимодействием с нашими сервисами.</p>
-					<p>1.4. Если вы не принимаете все настоящие условия, то вы не должны использовать наши сервисы.</p>
-					<p class="color-red">2. Правовая информация.</p>
-					<p>2.1. Если вы хотите связаться с нашей службой поддержки, отправьте электронное письмо на fm.eldoradio@gmail.com</p>
-					<p>2.2. Сайт может содержать информацию, не предназначенную для лиц моложе 16 лет.</p>
-					<p class="color-red">3. Авторские права на контент.</p>
-					<p>3.1. Весь контент и ссылки размещены на сайте в ознакомительных целях, предназначены только для удовлетворения любознательности посетителей и взяты исключительно из открытых источников. Мы не несем ответственности за доступность или достоверность этих источников или ресурсов, а также контент, продукцию или услуги, предлагаемые или содержащиеся на таких источниках или ресурсах.</p>
-					<p>3.2. Все права на графические, текстовые, аудио и музыкальные материалы, представленные на сайте, принадлежат их законным владельцам. Адрес сайта, находящийся на графических материалах не обозначает нашего авторского права на данные материалы. </p>
-					<p class="color-red">4. Реклама на сайте.</p>
-					<p>4.1. Упоминание продукта или услуги коммерческого или некоммерческого характера на сайте или наших сервисах не является одобрением или рекомендацией данных продуктов или услуг и носит исключительно информативный характер.</p>
-				</div>
-			</script>
-			<script id="notfound" type="text/x-handlebars-template">
-				<div class="textual">
-					<p class="color-red">Ошибка 404 - страница не найдена.</p>
-				</div>
-			</script>
-		</div>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="http://eldoradio.fm/inject/script.js"></script>
 	</body>
