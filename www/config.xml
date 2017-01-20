@@ -30,6 +30,7 @@
         <plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.3" />
         <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
         <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+        <plugin name="cordova-plugin-device" source="npm" spec="~1.1.4" />
         <icon qualifier="ldpi" src="res/icons/android/icon-36-ldpi.png"/>
         <icon qualifier="mdpi" src="res/icons/android/icon-48-mdpi.png"/>
         <icon qualifier="hdpi" src="res/icons/android/icon-72-hdpi.png"/>
@@ -37,13 +38,13 @@
         <icon qualifier="xxhdpi" src="res/icons/android/icon-144-xxhdpi.png"/>
         <icon qualifier="xxxhdpi" src="res/icons/android/icon-192-xxxhdpi.png"/>
     </platform>
-
     <platform name="ios">
         <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
         <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
         <plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.3" />
         <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
         <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+        <plugin name="cordova-plugin-device" source="npm" spec="~1.1.4" />
         <icon src="res/icons/ios/icon-small.png" width="29" height="29" />
         <icon src="res/icons/ios/icon-small-2x.png" width="58" height="58" />
         <icon src="res/icons/ios/icon-40.png" width="40" height="40" />
