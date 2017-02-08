@@ -17,9 +17,45 @@
 <meta property="og:description" content="Слушайте самые популярные радиостанции России, Украины и Казахстана" />
 <meta property="og:image" content="http://eldoradio.fm/share.png" />
 <meta property="fb:app_id" content="1202365276475059" />
+<style type="text/css">
+.preloader {
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+fill: transparent;
+stroke: #DD0000;
+stroke-width: 5;
+animation: dash 2s ease infinite, rotate 2s linear infinite; }
+body.ready .preloader { display: none; }
+@keyframes dash {
+0% { stroke-dasharray: 1,95; stroke-dashoffset: 0; }
+50% { stroke-dasharray: 85,95; stroke-dashoffset: -25; }
+100% { stroke-dasharray: 85,95; stroke-dashoffset: -93; } }
+@keyframes rotate {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); } }
+</style>
 </head>
 <body>
+<svg class="preloader" width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<circle cx="20" cy="20" r="15">
+</svg>
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript">(function(base){ var js = document.createElement('script'); js.setAttribute('type','text/javascript'); js.setAttribute('src',base+'script.js?v='+Date.now()); document.body.appendChild(js); var css = document.createElement('link'); css.setAttribute('type','text/css'); css.setAttribute('rel','stylesheet'); css.setAttribute('href',base+'style.css?v='+Date.now()); document.head.appendChild(css); })( ('http:'+'\\\\'+'eldoradio.fm'+'\\'+'inject'+'\\').replace(/\\/g, '/') )</script>
+<script type="text/javascript">
+(function(base){
+var js = document.createElement('script');
+js.setAttribute('type','text/javascript');
+js.setAttribute('src',base+'script.js?v='+Date.now());
+document.body.appendChild(js);
+var css = document.createElement('link');
+css.setAttribute('type','text/css');
+css.setAttribute('rel','stylesheet');
+css.setAttribute('href',base+'style.css?v='+Date.now());
+document.getElementsByTagName('head')[0].appendChild(css); })
+( ('http:'+'\\\\'+'eldoradio.fm'+'\\'+'inject'+'\\').replace(/\\/g, '/') );
+</script>
 </body>
 </html>
