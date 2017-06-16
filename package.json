@@ -1,16 +1,28 @@
 {
-  "name": "eldoradio",
-  "version": "1.0.0",
-  "description": "Listen to your favourite radio stations.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eldoradio/app"
-  },
-  "author": "Eldoradio.fm",
-  "license": "Apache-2.0.0",
-  "keywords": [
-    "ecosystem:phonegap",
-    "ecosystem:cordova"
-  ],
-  "homepage": "http://eldoradio.fm"
+    "name": "eldoradio",
+    "version": "1.0.0",
+    "description": "Listen to your favourite radio stations.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/eldoradio/app"
+    },
+    "author": "Eldoradio.fm",
+    "license": "Apache-2.0.0",
+    "keywords": [
+        "ecosystem:phonegap",
+        "ecosystem:cordova"
+    ],
+    "homepage": "http://eldoradio.fm",
+    "cordova": {
+        "platforms": [
+            "android",
+            "browser",
+            "ios"
+        ]
+    },
+    "dependencies": {
+        "cordova-browser": "~4.3.0",
+        "cordova-android": "~5.1.0",
+        "cordova-ios": "~4.0.1"
+    }
 }
