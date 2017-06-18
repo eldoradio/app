@@ -119,6 +119,8 @@ var ini = {
         };
     })(['cordova','jQuery','$','Handlebars','navigator']);
 
+    $.support.cors=true;
+
 /* OS Detection */
 
     // "Windows"    for all versions of Windows
@@ -157,6 +159,7 @@ var app = {
     },
     ajax: function (url, callback) {
         alert('ajax' + url);
+        try {
         if (window.XDomainRequest) {
             try {
                 var xdr = new XDomainRequest();
@@ -186,6 +189,9 @@ var app = {
                 callback(typeof data == 'string' ? data : JSON.stringify(data));
             });
         };
+        } catch (e) {
+            alert('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
+        }
     },
     storage: function (action, data, persistent) {
         alert('storage');
