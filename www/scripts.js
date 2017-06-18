@@ -61,8 +61,6 @@ $('body').append('\
 </div>\
 ');
 
-try {
-
 var ini = {
     protocol: 'http://',
     host: 'eldoradio.fm',
@@ -111,6 +109,8 @@ var ini = {
     }
 };
 
+alert(0);
+
 /* Dependency check-list */
 
     !(function(dependency){
@@ -120,6 +120,8 @@ var ini = {
             }
         };
     })(['cordova','jQuery','$','Handlebars','navigator']);
+
+alert(1);
 
 /* OS Detection */
 
@@ -136,6 +138,8 @@ var ini = {
     if (navigator.appVersion.indexOf('X11')!=-1) ini.os = 'UNIX';
     if (cordova.platformId!='browser') history.replaceState(null,null,'/');
 
+alert(2);
+
 /* Handlebars in_array helper */
 
     Handlebars.registerHelper('in_array', function(element, list, options) {
@@ -145,7 +149,9 @@ var ini = {
             }
         }
         return options.inverse(this);
-    });    
+    });
+
+alert(3);
 
 var app = {
     socket: function () {
@@ -607,10 +613,5 @@ var app = {
 };
 
 app.initialize();
-
-} catch (e)
-{
-alert('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
-}
 
 });
