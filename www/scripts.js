@@ -61,6 +61,8 @@ $('body').append('\
 </div>\
 ');
 
+try {
+
 var ini = {
     protocol: 'http://',
     host: 'eldoradio.fm',
@@ -393,10 +395,8 @@ var app = {
             
         /* if not pushstate event */
             if (!view) {
-                alert('0');
                 app.PreparePage();
                 app.SetEventListeners();
-                alert('1');
                 //app.AttachScrollbar('body');
             }
     },
@@ -607,5 +607,10 @@ var app = {
 };
 
 app.initialize();
+
+} catch (e)
+{
+alert('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
+}
 
 });
