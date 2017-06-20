@@ -596,7 +596,7 @@ var app = {
     },
     SendStats: function () {
         //alert('SendStats');
-        if (device != 'undefined') {
+        if (window.device !== undefined) {
             if (device.uuid !== null) {
                 console.log(device.platform + ' ' + device.version);
                 console.log(device.manufacturer + ' ' + device.model);
