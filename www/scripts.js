@@ -159,26 +159,21 @@ var app = {
     },
     ajax: function (url, callback) {
         //alert('ajax' + url);
-        try {
         if (window.XDomainRequest) {
-            try {
-                var xdr = new XDomainRequest();
-                xdr.open("get", url);
-                xdr.onload = function() {
-                    callback(typeof xdr.responseText == 'string' ? xdr.responseText : JSON.stringify(xdr.responseText));
-                };
-                xdr.onprogress = function(){};
-                xdr.ontimeout = function(){};
-                xdr.onerror = function(){
-                    console.log('AJAX: fail for \'' + url + '\'');
-                    callback(false);
-                };
-                setTimeout(function(){
-                    xdr.send();
-                }, 0);
-            } catch (e){
-                console.log(e);
-            }
+            var xdr = new XDomainRequest();
+            xdr.open("get", url);
+            xdr.onload = function() {
+                callback(typeof xdr.responseText == 'string' ? xdr.responseText : JSON.stringify(xdr.responseText));
+            };
+            xdr.onprogress = function(){};
+            xdr.ontimeout = function(){};
+            xdr.onerror = function(){
+                console.log('AJAX: fail for \'' + url + '\'');
+                callback(false);
+            };
+            setTimeout(function(){
+                xdr.send();
+            }, 0);
         } else {
            $.ajax(url)
             .fail(function (data) {
@@ -189,7 +184,6 @@ var app = {
                 callback(typeof data == 'string' ? data : JSON.stringify(data));
             });
         };
-        } catch (e) 
     },
     storage: function (action, data, persistent) {
         //alert('storage');
@@ -225,11 +219,7 @@ var app = {
     },
     initialize: function () {
         //alert('initialize');
-        try {
-            document.addEventListener('deviceready', app.DeviceReady, false);
-        } catch (e) {
-            console.log(e);
-        }
+        document.addEventListener('deviceready', app.DeviceReady, false);
     },
     resize: function () {
         //alert('resize');
