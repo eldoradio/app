@@ -158,7 +158,7 @@ var app = {
         return ini.protocol + ini.host + (path || '');
     },
     ajax: function (url, callback) {
-        alert('ajax' + url);
+        //alert('ajax' + url);
         try {
         if (window.XDomainRequest) {
             try {
@@ -189,12 +189,10 @@ var app = {
                 callback(typeof data == 'string' ? data : JSON.stringify(data));
             });
         };
-        } catch (e) {
-            alert('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
-        }
+        } catch (e) 
     },
     storage: function (action, data, persistent) {
-        alert('storage');
+        //alert('storage');
         var storage = (persistent !== undefined) ? window.localStorage : window.sessionStorage;
         if (action == 'get') {
             return storage.getItem(data);
@@ -226,7 +224,7 @@ var app = {
         }
     },
     initialize: function () {
-        alert('initialize');
+        //alert('initialize');
         try {
             document.addEventListener('deviceready', app.DeviceReady, false);
         } catch (e) {
@@ -234,7 +232,7 @@ var app = {
         }
     },
     resize: function () {
-        alert('resize');
+        //alert('resize');
         if (document.createEvent) {
             var ev = document.createEvent('Event');
             ev.initEvent('resize', true, true);
@@ -246,7 +244,7 @@ var app = {
         }
     },
     GetStations: function (callback) {
-        alert('GetStations');
+        //alert('GetStations');
         app.ajax(app.host(ini.station.source)/*app.api('/json')*/, function(data){
             if (data === false) {
                 app.ReloadPage();
@@ -257,7 +255,7 @@ var app = {
         });
     },
     GetStationsBy: function (parameter, unique) {
-        alert('GetStationsBy');
+        //alert('GetStationsBy');
         if (parameter === undefined || unique === undefined) {
             console.warn('Provide sorting paremeter and unique selector (true or false).');
             return;
@@ -277,7 +275,7 @@ var app = {
         console.log(result);
     },
     StoreStations: function (data) {
-        alert('StoreStations');
+        //alert('StoreStations');
         data = $.parseJSON(data);
         data.sort(function (a,b) {
             var x = (''+a.name).toLowerCase(), y = (''+b.name).toLowerCase();
@@ -299,13 +297,13 @@ var app = {
         app.storage('set', {'stations':JSON.stringify(ini.station.list)});
     },
     PrepareStations: function () {
-        alert('PrepareStations');
+        //alert('PrepareStations');
         ini.station.list = $.parseJSON(app.storage('get','stations')) || {};
         ini.station.saved = $.parseJSON(app.storage('get','saved',true));
         return (!$.isEmptyObject(ini.station.list));
     },
     OrderStations: function (argument) {
-        alert('OrderStations');
+        //alert('OrderStations');
         /* set order to station list */
             if ($('.title').length > 0) {
                 $('.title').eq(0).addClass('active');
@@ -319,7 +317,7 @@ var app = {
             }
     },
     Adds: function (page) {
-        alert('Adds');
+        //alert('Adds');
         if (page == ini.page.home) {
             var temp = [], count = 0;
             $.each(ini.station.list, function(i, value) {
@@ -366,12 +364,12 @@ var app = {
         }
     },
     CompileHtml: function (element, data) {
-        alert('CompileHtml');
+        //alert('CompileHtml');
         var html = Handlebars.compile($(element).html());
         return html( data !== undefined ? $.parseJSON(data) : null );
     },
     OutputPage: function (page, view) {
-        alert('OutputPage');
+        //alert('OutputPage');
         /* router */
             var html = '';
                 page = page || location.pathname;
@@ -417,7 +415,7 @@ var app = {
             }
     },
     AttachScrollbar: function (element) {
-        alert('AttachScrollbar');
+        //alert('AttachScrollbar');
         if (typeof $.fn.scroll == 'function' && ini.os == 'Windows') {
             $(element).scrollbar({
                 horizrailenabled: false,
@@ -431,7 +429,7 @@ var app = {
         }
     },
     PreparePage: function () {
-        alert('PreparePage');
+        //alert('PreparePage');
         $('html').addClass(cordova.platformId);
         $('html').addClass(cordova.platformId == 'browser' ? ini.os.toLowerCase() : 'application');
         $('.copyright').append(ini.message.share_link, ini.message.player_link);
@@ -449,13 +447,13 @@ var app = {
             app.SendStats();
     },
     ReloadPage: function () {
-        alert('ReloadPage');
+        //alert('ReloadPage');
         setTimeout(function () {
              location.reload();
         }, 30000);
     },
     AudioEventListener: function (e) {
-        alert('AudioEventListener');
+        //alert('AudioEventListener');
         $(ini.audio.id).get(0).addEventListener(e, function () {
             console.log('Audio: ' + e);
             if (e == 'playing') {
@@ -480,7 +478,7 @@ var app = {
         }, true);
     },
     SetEventListeners: function () {
-        alert('SetEventListeners');
+        //alert('SetEventListeners');
         for (var i = 0; i < ini.audio.events.length; i++) {
             app.AudioEventListener(ini.audio.events[i]);
         };
@@ -607,14 +605,16 @@ var app = {
         });
     },
     SendStats: function () {
-        alert('SendStats');
-        if (device.uuid !== null) {
-            console.log(device.platform + ' ' + device.version);
-            console.log(device.manufacturer + ' ' + device.model);
+        //alert('SendStats');
+        if (device != 'undefined') {
+            if (device.uuid !== null) {
+                console.log(device.platform + ' ' + device.version);
+                console.log(device.manufacturer + ' ' + device.model);
+            }
         }
     },
     DeviceReady: function () {
-        alert('DeviceReady');
+        //alert('DeviceReady');
         if (app.PrepareStations()) {
             app.OutputPage();
         } else {
