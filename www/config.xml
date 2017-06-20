@@ -21,6 +21,7 @@
     <allow-intent href="itms-apps:*" />
     <allow-navigation href="*://*.eldoradio.fm/*" />
     <preference name="phonegap-version" value="cli-6.5.0" />
+    <plugin name="cordova-plugin-device" spec="~1.1.4" />
     <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
     <platform name="browser">
         <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
